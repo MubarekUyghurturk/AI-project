@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contacts</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card">
+    <h1>Contacts</h1>
+    <form id="contact-form">
+      <input type="text" id="firstName" placeholder="First name" pattern="[A-Za-z\s\-']+" title="Letters, spaces, hyphens, and apostrophes only" required />
+      <input type="text" id="lastName" placeholder="Last name" pattern="[A-Za-z\s\-']+" title="Letters, spaces, hyphens, and apostrophes only" required />
+      <button type="submit">Add</button>
+    </form>
+    <p id="error" class="error" hidden></p>
+    <ul id="contact-list"></ul>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
