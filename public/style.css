@@ -114,6 +114,19 @@ ul#contact-list li:last-child {
   border-bottom: none;
 }
 
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--muted);
+}
+
 .remove-btn {
   background: none;
   color: var(--muted);

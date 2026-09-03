@@ -25,15 +25,23 @@ function renderContacts(contacts) {
   contacts.forEach((contact) => {
     const li = document.createElement('li');
 
+    const info = document.createElement('span');
+    info.className = 'contact-info';
+    info.innerHTML =
+      '<svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+      '<path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>' +
+      '</svg>';
+
     const name = document.createElement('span');
     name.textContent = `${contact.firstName} ${contact.lastName}`;
+    info.appendChild(name);
 
     const removeBtn = document.createElement('button');
     removeBtn.textContent = 'Remove';
     removeBtn.className = 'remove-btn';
     removeBtn.addEventListener('click', () => deleteContact(contact.id));
 
-    li.appendChild(name);
+    li.appendChild(info);
     li.appendChild(removeBtn);
     list.appendChild(li);
   });
