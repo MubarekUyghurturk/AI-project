@@ -65,7 +65,7 @@ form.addEventListener('submit', async (e) => {
   const lastName = lastNameInput.value.trim();
   if (!firstName || !lastName) return;
 
-  const NAME_PATTERN = /^[A-Za-z\s\-']+$/;
+  const NAME_PATTERN = /^[\p{L}\s\-']+$/u;
   if (!NAME_PATTERN.test(firstName) || !NAME_PATTERN.test(lastName)) {
     showError('Names may only contain letters, spaces, hyphens, and apostrophes');
     return;
