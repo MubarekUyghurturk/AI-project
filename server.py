@@ -2,6 +2,7 @@ import json
 import os
 import re
 import time
+import unicodedata
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse
 
@@ -18,12 +19,21 @@ MIME = {
 
 CONTACT_ID_RE = re.compile(r"^/api/contacts/([^/]+)$")
 NAME_ALLOWED_EXTRA = " -'"
+# Unicode general categories that make up a "letter" for name purposes.
+# isalpha() alone only covers Lu/Ll/Lt/Lm/Lo and misses the combining marks
+# (Mn/Mc) that scripts like Hindi (Devanagari) and Thai rely on for vowels
+# and tone marks, e.g. "राजेश" or "สวัสดี" — those are valid names, not
+# special characters.
+NAME_ALLOWED_CATEGORIES = {"Lu", "Ll", "Lt", "Lm", "Lo", "Mn", "Mc"}
 
 
 def is_valid_name(value):
     if not value:
         return False
-    return all(ch.isalpha() or ch in NAME_ALLOWED_EXTRA for ch in value)
+    return all(
+        unicodedata.category(ch) in NAME_ALLOWED_CATEGORIES or ch in NAME_ALLOWED_EXTRA
+        for ch in value
+    )
 
 
 def read_contacts():
